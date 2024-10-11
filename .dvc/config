@@ -1,0 +1,4 @@
+[core]
+    remote = local_remote
+['remote "local_remote"']
+    url = /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/dvc_storage
