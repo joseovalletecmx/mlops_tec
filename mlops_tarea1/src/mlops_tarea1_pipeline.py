@@ -158,7 +158,7 @@ def integrate_features_data(X_dataframe,y_dataframe,continuous_df_features,categ
     } 
 
 def save_preproccesed_data(dataframe):
-    path = config['data_load']['preprocessed_path']
+    path = config['data_preprocess']['preprocessed_path']
     dataframe.to_csv(path, index= False)
     print("Data stored at:", path)
     return None
