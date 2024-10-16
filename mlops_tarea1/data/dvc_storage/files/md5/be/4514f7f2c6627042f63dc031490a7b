@@ -1,0 +1,59 @@
+name,role,type,demographic,description,units,missing_values
+Age,Feature,Continuous,Age,Obtained from the date of birth,years,yes
+BMI,Feature,Continuous,,Measures body fat; patient's weight divided by the square of the height,,yes
+Sex,Feature,Categorical,Sex,Registered gender,,yes
+Height,Feature,Continuous,,Patient's height,,yes
+Weight,Feature,Integer,,Patient's weight,,yes
+Length_of_Stay,Feature,Integer,,Length of the stay in the hospital,,yes
+Management,Target,Categorical,,"(conservative, primary surgical, secondary surgical, simultaneous appendectomy) Management of the patient assigned by a senior pediatric surgeon: operative (appendectomy: laparoscopic, open or conversion) or conservative (without antibiotics). In case of the secondary surgery after prior stay, the patient was labelled as operatively managed.",,yes
+Severity,Target,Categorical,,"(uncomplicated, complicated) Severity of appendicitis: uncomplicated: subacute/ catharral, fibrosis; phlegmonous or complicated: gangrenous, perforated, abscessed",,yes
+Diagnosis_Presumptive,Other,Binary,,Patient's suspected diagnosis,,yes
+Diagnosis,Target,Binary,,"Patient's diagnosis, histologically confirmed for operated patients. Conservatively managed patients were labelled as having appendicitis if they had an AS or PAS of ≥ 4 and an appendix diameter of ≥ 6 mm",,yes
+Alvarado_Score,Feature,Integer,,Patient's score according to the scoring system,,yes
+Paedriatic_Appendicitis_Score,Feature,Integer,,Patient's score according to the scoring system,,yes
+Appendix_on_US,Feature,Binary,,Detectability of the vermiform appendix during sonographic examination,,yes
+Appendix_Diameter,Feature,Integer,,Maximal outer diameter of the appendix,,yes
+Migratory_Pain,Feature,Binary,,Abdominal pain; usually starts in epigastrium and moves to the right lower quadrant,,yes
+Lower_Right_Abd_Pain,Feature,Binary,,Right iliac fossa pain detected on palpation,,yes
+Contralateral_Rebound_Tenderness,Feature,Binary,,"A state in which pain of the contralateral side (usually, the right lower quadrant) is felt on the release of pressure (usually, in the left lower quadrant) over the abdomen",,yes
+Coughing_Pain,Feature,Binary,,Abdominal pain by forced cough,,yes
+Nausea,Feature,Binary,,Feeling of sickness/ejection of contents from stomach through the mouth,,yes
+Loss_of_Appetite,Feature,Binary,,,,yes
+Body_Temperature,Feature,Continuous,,Measured by a thermometer placed in the rectum or in the auditory canal,,yes
+WBC_Count,Feature,Continuous,,The number of leucocytes in a unit volume of blood; inflammation parameter,,yes
+Neutrophil_Percentage,Feature,Integer,,Mature WBC in the granulocytic series,,yes
+Segmented_Neutrophils,Feature,Integer,,"Most mature neutrophilic granulocytes present in circulating blood, increased during an inflammatory disorder",,yes
+Neutrophilia,Feature,Categorical,,"Relative neutrophilic leucocytosis, often a result of a bacterial infection",,yes
+RBC_Count,Feature,Continuous,,The number of erythrocytes in a unit volume of blood,,yes
+Hemoglobin,Feature,Continuous,,Hemoglobin level; a red protein in the red blood cells that contains iron and is responsible for transporting oxygen,,yes
+RDW,Feature,Continuous,,A blood test that measures the differences in the volume and size of the erythrocytes,,yes
+Thrombocyte_Count,Feature,Integer,,The number of platelets in a unit volume of blood,,yes
+Ketones_in_Urine,Feature,Categorical,,"Presence of ketone bodies in urine, e.g. in case of anorexia",,yes
+RBC_in_Urine,Feature,Categorical,,Blood in urine,,yes
+WBC_in_Urine,Feature,Categorical,,"Leucocytes in urine, e.g., in case of infection",,yes
+CRP,Feature,Integer,,"Protein produced by the liver, elevated in case of inflammation, infection, or injury",,yes
+Dysuria,Feature,Binary,,Pain or other difficulty during urination,,yes
+Stool,Feature,Categorical,,Characteristics of bowel movements,,yes
+Peritonitis,Feature,Categorical,,"Spasm of abdominal wall muscles detected on palpation, usually a result of inflammation",,yes
+Psoas_Sign,Feature,Categorical,,Abdominal pain produced by extension of the hip,,yes
+Ipsilateral_Rebound_Tenderness,Feature,Categorical,,A state in which pain of the ipsilateral side is felt on the release of pressure over the abdomen,,yes
+US_Performed,Feature,Categorical,,If an abdominal ultrasonography was performed or not,,yes
+US_Number,Other,Integer,,,,yes
+Free_Fluids,Feature,Categorical,,Free fluids inside the abdomen,,yes
+Appendix_Wall_Layers,Feature,Categorical,,"Distribution and characteristics of appendix layers, e.g., irregular in case of an increasing inflammation",,yes
+Target_Sign,Feature,Categorical,,Axial image of appendix with a fluid-filled center surrounded by echogenic mucosa and submucosa and hypoechoic muscularis,,yes
+Appendicolith,Feature,Categorical,,"Presence of fecalith in the appendix, e.g. acoustic shadow",,yes
+Perfusion,Feature,Categorical,,Blood flow to the appendix wall,,yes
+Perforation,Feature,Categorical,,Signs of appendix perforation in US,,yes
+Surrounding_Tissue_Reaction,Feature,Categorical,,Inflammation signs in tissue (i.a. in omentum/fat tissue) surrounding appendix,,yes
+Appendicular_Abscess,Feature,Categorical,,Appendiceal mass,,yes
+Abscess_Location,Feature,Categorical,,Location of the abcess intraperitoneal,,yes
+Pathological_Lymph_Nodes,Feature,Binary,,Enlarged and inflamed intra-abdominal lymph nodes,,yes
+Lymph_Nodes_Location,Feature,Categorical,,The location of pathological lymph nodes in the abdomen,,yes
+Bowel_Wall_Thickening,Feature,Binary,,"Edema of the intestinal wall, > 2-3 mm for small bowel wall thickening",,yes
+Conglomerate_of_Bowel_Loops,Feature,Binary,,Small intestine conglomerate as sign of intraperitoneal inflammation,,yes
+Ileus,Feature,Categorical,,"Sonographic signs of paralytic ileus (e.g., dilated intestinal loops, pendulum peristalsis or absence of peristalsis)",,yes
+Coprostasis,Feature,Categorical,,Fecal impaction in the colon,,yes
+Meteorism,Feature,Categorical,,Accumulation of gas in the intestine,,yes
+Enteritis,Feature,Categorical,,"Sonographic features of gastroenteritis, e.g. wall thickening of ileum, increased peristalsis",,yes
+Gynecological_Findings,Feature,Categorical,,"Gynaecological abnormalities, e.g. cysts, ovarial torsion",,yes
