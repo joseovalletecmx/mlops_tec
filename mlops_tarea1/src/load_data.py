@@ -1,9 +1,15 @@
 
 from ucimlrepo import fetch_ucirepo
 import pandas as pd
+from typing import Text
 import argparse
+import yaml
 
-def load_rawdata(features_path, targets_path, variables_path, raw_df_path):
+def load_rawdata(config_path: Text) -> None:
+
+    with open('/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml') as conf_file:
+        config = yaml.safe_load(conf_file)
+    
     # fetch dataset 
     regensburg_pediatric_appendicitis = fetch_ucirepo(id=938) 
     
@@ -13,26 +19,25 @@ def load_rawdata(features_path, targets_path, variables_path, raw_df_path):
     variables = regensburg_pediatric_appendicitis.variables
     raw_df = pd.concat([features, targets], axis=1)
 
+    # export paths
+    features_path = config['data_load']['features_path']  
+    targets_path = config['data_load']['targets_path'] 
+    variables_path = config['data_load']['variables_path'] 
+    raw_df_path = config['data_load']['raw_path'] 
+
     # export to csv
-    features.to_csv(features_path, index=False)
-    targets.to_csv(targets_path, index=False)
-    variables.to_csv(variables_path, index=False)
-    raw_df.to_csv(raw_df_path, index=False)
-    
+    features.to_csv(features_path, index = False)
+    targets.to_csv(targets_path, index = False)
+    variables.to_csv(variables_path, index = False)
+    raw_df.to_csv(raw_df_path, index = False)
+
     print("Data imported succesfully") 
     return None
 
 if __name__ == "__main__":
     # Set up argument parsing
-    parser = argparse.ArgumentParser(description='Load raw data and save to CSV files.')
-    parser.add_argument('--features_path', type=str, dest ='features_path', required=True)
-    parser.add_argument('--targets_path', type=str, dest ='targets_path', required=True)
-    parser.add_argument('--variables_path', type=str, dest ='variables_path', required=True)
-    parser.add_argument('--raw_df_path', type=str, dest ='df_path', required=True)
-    
-    args = parser.parse_args()
-    
+    args_parser = argparse.ArgumentParser(description='Load raw data and save to CSV files.')
+    args_parser.add_argument('--config', dest ='config', required=True)
+    args = args_parser.parse_args()    
     # Call the function with command line arguments
-    load_rawdata(args.features_path, args.targets_path, args.variables_path, args.raw_df_path)
-
-  
+    load_rawdata(config_path= args.config)
