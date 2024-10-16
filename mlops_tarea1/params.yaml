@@ -10,7 +10,8 @@ data_split:
   y_train_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/y_train.csv'
   y_test_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/y_test.csv'
 
-model:
+data_model:
   model_path: /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/models/appendictis_model.pkl
+  model_report_path: /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/reports/model_report.csv'
     
 
