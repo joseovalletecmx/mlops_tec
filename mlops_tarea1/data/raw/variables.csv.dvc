@@ -1,0 +1,5 @@
+outs:
+- md5: be4514f7f2c6627042f63dc031490a7b
+  size: 6244
+  hash: md5
+  path: variables.csv
