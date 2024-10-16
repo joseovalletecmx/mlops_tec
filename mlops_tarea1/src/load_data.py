@@ -1,6 +1,4 @@
 
-import sys
-import yaml
 from ucimlrepo import fetch_ucirepo
 import pandas as pd
 import argparse
