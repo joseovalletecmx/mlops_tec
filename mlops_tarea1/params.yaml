@@ -1,4 +1,7 @@
 data_load:
+  features_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/features.csv'
+  targets_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/targets.csv'
+  variables_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/variables.csv'
   raw_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/uci_df_raw.csv'
   preprocessed_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/uci_df.csv'
 
