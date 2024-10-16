@@ -25,10 +25,10 @@ def load_rawdata(features_path, targets_path, variables_path, raw_df_path):
 if __name__ == "__main__":
     # Set up argument parsing
     parser = argparse.ArgumentParser(description='Load raw data and save to CSV files.')
-    parser.add_argument('features_path', type=str, help='Path to save features CSV')
-    parser.add_argument('targets_path', type=str, help='Path to save targets CSV')
-    parser.add_argument('variables_path', type=str, help='Path to save variables CSV')
-    parser.add_argument('raw_df_path', type=str, help='Path to save raw DataFrame CSV')
+    parser.add_argument('--features_path', type=str, dest ='features_path', required=True)
+    parser.add_argument('--targets_path', type=str, dest ='targets_path', required=True)
+    parser.add_argument('--variables_path', type=str, dest ='variables_path', required=True)
+    parser.add_argument('--raw_df_path', type=str, dest ='df_path', required=True)
     
     args = parser.parse_args()
     
