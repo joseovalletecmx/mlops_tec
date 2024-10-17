@@ -7,7 +7,7 @@ import yaml
 
 def load_rawdata(config_path: Text) -> None:
 
-    with open('/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml') as conf_file:
+    with open(config_path) as conf_file:
         config = yaml.safe_load(conf_file)
     
     # fetch dataset 
@@ -41,3 +41,7 @@ if __name__ == "__main__":
     args = args_parser.parse_args()    
     # Call the function with command line arguments
     load_rawdata(config_path= args.config)
+
+
+
+
