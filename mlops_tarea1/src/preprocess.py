@@ -10,133 +10,221 @@ from typing import Text
 import argparse
 
 
-with open('/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml') as conf_file:
-    config = yaml.safe_load(conf_file)
+# with open('/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml') as conf_file:
+#    config = yaml.safe_load(conf_file)
+
+class DataPreprocessor:
+    def __init__(self,config_path: Text) -> None:
+        self.config_path = config_path
+        self.config = self.load_config()
+        self._raw_df = None  # Private attribute to store raw DataFrame
+        self._features = None  # Private attribute for features
+        self._targets = None  # Private attribute for targets
+        self._variables = None  # Private attribute for variables
+        self._continuous_features = None # Private attribute for continuous features
+        self._categorical_features = None # Private attribute for categorical features 
+        self._integer_features = None # Private attribute for integer features 
+        self._binary_features = None # Private attribute for binary features
+        self._target = None # Private attribute for binary features 
+        self._continuous_df_features = None # Private attribute for normalized continuous features
+        self._categorical_df_features = None # Private attribute for encoded categorical features
+        self._selected_features = None   # Private attribute for engineered features
+        self._X_preprocessed = None # Private attribute for preprocessed features 
+        self._y_preprocessed = None # Private attribute for preprocessed target 
+        self._preprocessed_data = None # Private attribute for preprocessed data
+        self._X_train = None # Private attribute for training dataset
+        self._X_test = None # # Private attribute for test dataset
+        self._y_train = None # # Private attribute for training dataset
+        self._y_test = None # Private attribute for test dataset
+    @property
+    def features(self):
+        return self._features
+
+    @property
+    def targets(self):
+        return self._targets
+
+    @property
+    def raw_df(self):
+        return self._raw_df
+
+    @property
+    def variables(self):
+        return self._variables
     
-def get_features(features_df, feature_type):
-    df_featuretype = features_df[(features_df['type'] == feature_type) & (features_df['role'] == 'Feature')]
-    features = df_featuretype['name'].unique()
-    features = list(features)    
-    return features
+    @property
+    def continuous_features(self):
+        return self._continuous_features
+    
+    @property
+    def categorical_features(self):
+        return self._categorical_features
+    
+    @property
+    def integer_features(self):
+        return self._integer_features
+    
+    @property
+    def binary_features(self):
+        return self._binary_features
+     
+    @property
+    def continuous_df_features(self):
+        return self._continuous_df_features 
 
-def continuous_imputation(dataframe,featuretype) -> None:
-    for feature in featuretype:
-        mean_value = dataframe[feature].mean()    
-        dataframe.loc[:, feature] = dataframe[feature].fillna(mean_value)
+    @property
+    def categorical_df_features(self):
+        return self._categorical_df_features 
+    
+    @property
+    def X_preprocessed(self):
+        return self._X_preprocessed
 
-def integer_imputation(dataframe,featuretype) -> None: 
-    for feature in featuretype:
-        mode_value = dataframe[feature].mode()[0]    
-        dataframe.loc[:, feature] = dataframe[feature].fillna(mode_value)      
+    @property
+    def y_preprocessed(self):
+        return self._y_preprocessed
 
-def categorical_imputation(dataframe,featuretype) -> None:
-    for feature in featuretype:
-        dataframe.loc[:, feature] = dataframe[feature].fillna('Not present') 
+    @property
+    def preprocessed_data(self):
+        return self._X_preprocessed_data
+    
+    @property
+    def X_train(self):
+        return self._X_train
 
-def binary_imputation(dataframe,featuretype) -> None:
-    for feature in featuretype:
-        dataframe.loc[:, feature] = dataframe[feature].fillna('Unkown')
+    @property
+    def X_test(self):
+        return self._X_test
 
-def impute_y(dataframe):
-    dataframe = dataframe['Diagnosis']
-    dataframe = pd.DataFrame(dataframe)
-    dataframe.loc[dataframe['Diagnosis']=='appendicitis'] = 1
-    dataframe.loc[dataframe['Diagnosis']=='no appendicitis'] = 0
-    mode_value = dataframe['Diagnosis'].mode()[0]
-    dataframe =  dataframe.fillna(mode_value)   
-    return dataframe
+    @property
+    def y_train(self):
+        return self._y_train
 
-def normalize(dataframe, features):
-    scaler = MinMaxScaler()
-    continuous_df_features = pd.DataFrame(scaler.fit_transform(dataframe[features]), columns = dataframe[features].columns)
-    return continuous_df_features
+    @property
+    def y_test(self):
+        return self._y_test
 
-def encode(dataframe, categorical_features, binary_features):
-    categorical_df_features = pd.concat([dataframe[categorical_features],dataframe[binary_features]], axis = 1)
-    categorical_df_features = pd.get_dummies(categorical_df_features, drop_first = True)
-    return categorical_df_features
+    @property
+    def selected_features(self):
+        return self._selected_features
 
-def select_features(dataframe):
-    selected_features = ['Age','BMI','Height','WBC_Count']
-    print(selected_features, ' were selected for dimensionality reduction')
-    dataframe = dataframe[selected_features]
-    return dataframe
+    def load_config(self):
+        with open(self.config_path) as conf_file:
+            config = yaml.safe_load(conf_file)
+        return config
 
-def integrate_features_data(X_dataframe,y_dataframe,continuous_df_features,categorical_df_features,integer_features):
-    # Integración de variables continuas y categóricas
-    X_preprocessed = pd.concat([continuous_df_features,categorical_df_features], axis = 1)
-    # Integración de variables integer
-    X_preprocessed = pd.concat([X_preprocessed,X_dataframe[integer_features]], axis = 1)
-    # Dataframe resultante listo para entrengar el modelo
-    data_preprocessed_df = pd.concat([X_preprocessed,y_dataframe], axis = 1)
+    def load_data(self):
+        self._features = pd.read_csv(self.config['data_load']['features_path']) 
+        self._targets = pd.read_csv(self.config['data_load']['targets_path']) 
+        self._variables = pd.read_csv(self.config['data_load']['variables_path']) 
+        self._raw_df = pd.read_csv(self.config['data_load']['raw_path'])
 
-    return {
-         'X_preprocessed': X_preprocessed
-        ,'y_preprocessed': y_dataframe
-        ,'preprocessed_data': data_preprocessed_df
-    } 
+    def get_continuous_features(self):
+        df_featuretype = self.variables[(self.variables['type'] == 'Continuous') & (self.variables['role'] == 'Feature')]
+        features = df_featuretype['name'].unique()
+        self._continuous_features = list(features)     
 
-def save_preproccesed_data(dataframe) -> None:
-    path = config['data_preprocess']['preprocessed_path']
-    dataframe.to_csv(path, index= False)
-    print("Data stored at:", path)
+    def get_categorical_features(self):
+        df_featuretype = self.variables[(self.variables['type'] == 'Categorical') & (self.variables['role'] == 'Feature')]
+        features = df_featuretype['name'].unique()
+        self._categorical_features = list(features)
 
-def split_train_test(dict) -> None:
-    # split data
-    X_train, X_test, y_train, y_test = train_test_split( dict['X_preprocessed']
-                                                        ,dict['y_preprocessed'].astype(int)
-                                                        ,test_size= config['data_split']['test_size']
-                                                        ,random_state= config['data_split']['random_state']
-                                                        ,stratify= dict['y_preprocessed'].astype(int)
+    def get_integer_features(self):
+        df_featuretype = self.variables[(self.variables['type'] == 'Integer') & (self.variables['role'] == 'Feature')]
+        features = df_featuretype['name'].unique()
+        self._integer_features = list(features)
+
+    def get_binary_features(self):
+        df_featuretype = self.variables[(self.variables['type'] == 'Binary') & (self.variables['role'] == 'Feature')]
+        features = df_featuretype['name'].unique()
+        self._binary_features = list(features)
+
+    def impute_continuous_features(self):
+        for feature in self._continuous_features:
+            mean_value = self._features[feature].mean()    
+            self._features.loc[:, feature] = self._features[feature].fillna(mean_value)
+
+    def impute_integer_features(self): 
+        for feature in self._integer_features:
+            mode_value = self._features[feature].mode()[0]    
+            self._features.loc[:, feature] = self._features[feature].fillna(mode_value)
+
+    def impute_categorical_features(self):
+        for feature in self._categorical_features:
+            self._features.loc[:, feature] = self._features[feature].fillna('Not present')
+
+    def impute_binary_features(self):
+        for feature in self._binary_features:
+            self._features.loc[:, feature] = self._features[feature].fillna('Unkown')
+            
+    def impute_target(self):
+        self._target = self._targets['Diagnosis']
+        self._target = pd.DataFrame(self._target)
+        self._target.loc[self._target['Diagnosis']=='appendicitis'] = 1
+        self._target.loc[self._target['Diagnosis']=='no appendicitis'] = 0
+        mode_value = self._target['Diagnosis'].mode()[0]
+        self._target =  self._target.fillna(mode_value)
+
+    def normalize(self):
+        scaler = MinMaxScaler()
+        self._continuous_df_features = pd.DataFrame(scaler.fit_transform(self._features[self._continuous_features]), columns = self._features[self._continuous_features].columns)
+
+    def encode(self):
+        self._categorical_df_features = pd.concat([self._features[self._categorical_features],self._features[self._binary_features]], axis = 1)
+        self._categorical_df_features= pd.get_dummies(self._categorical_df_features, drop_first = True)
+
+    def engineer_features(self):
+        self._selected_features = self.config['feature_selection']['selected_features']
+        self._continuous_df_features = self._continuous_df_features[self.selected_features]
+
+    def integrate_data(self):
+        self._X_preprocessed = pd.concat([self._continuous_df_features,self._categorical_df_features], axis = 1)
+        self._X_preprocessed = pd.concat([self._X_preprocessed,self._features[self._integer_features]], axis = 1)
+        self._y_preprocessed = self._target
+        self._preprocessed_data = pd.concat([self._X_preprocessed,self._target], axis = 1)
+        path = self.config['data_preprocess']['preprocessed_path']
+        self._preprocessed_data.to_csv(path)
+
+    def train_test_split(self):        
+        self._X_train, self._X_test, self._y_train, self._y_test = train_test_split( self._X_preprocessed
+                                                        ,self._y_preprocessed.astype(int)
+                                                        ,train_size = .8
+                                                        ,test_size=0.2
+                                                        ,random_state=42
+                                                        ,stratify= self._y_preprocessed.astype(int)
                                                         )
-    
-    # save datasets 
-    path_x_train = config['data_split']['x_train_path']
-    path_x_test = config['data_split']['x_test_path']
-    path_y_train = config['data_split']['y_train_path']
-    path_y_test = config['data_split']['y_test_path']           
-    
-    X_train.to_csv(path_x_train, index= False)
-    X_test.to_csv(path_x_test, index= False)
-    y_train.to_csv(path_y_train, index= False)
-    y_test.to_csv(path_y_test, index= False)           
-
-    print("Data stored at:", path_x_train)  
-    print("Data stored at:", path_x_test)  
-    print("Data stored at:", path_y_test)  
-    print("Data stored at:", path_y_train)    
-
-
-
+    def save_data_split(self):  
+        path_x_train = self.config['data_split']['x_train_path']
+        path_x_test = self.config['data_split']['x_test_path']
+        path_y_train = self.config['data_split']['y_train_path']
+        path_y_test = self.config['data_split']['y_test_path']           
+        
+        self._X_train.to_csv(path_x_train, index= False)
+        self._X_test.to_csv(path_x_test, index= False)
+        self._y_train.to_csv(path_y_train, index= False)
+        self._y_test.to_csv(path_y_test, index= False)
+        
 if __name__ == "__main__":
     # Set up argument parsing
-    
-    # args_parser = argparse.ArgumentParser(description='Load raw data and save to CSV files.')
-    # args_parser.add_argument('--config', dest ='config', required=True)
-    # args = args_parser.parse_args()   
-    
-    # Execute preprocessing pipeline
-    # Call the function with command line arguments
-    # load_rawdata(config_path= args.config)
+    args_parser = argparse.ArgumentParser(description='Preprocess data')
+    args_parser.add_argument('--config', dest='config', required=True)
+    args = args_parser.parse_args()
 
-    X = pd.read_csv(config['data_load']['features_path'] )
-    y = pd.read_csv(config['data_load']['targets_path'] )
-    features = pd.read_csv(config['data_load']['variables_path'])
-    continuous_features = get_features(features,'Continuous')
-    categorical_features = get_features(features,'Categorical')
-    binary_features = get_features(features,'Binary')
-    integer_features = get_features(features,'Integer')
-
-    continuous_imputation(X,continuous_features)
-    categorical_imputation(X,categorical_features)
-    binary_imputation(X,binary_features)
-    integer_imputation(X,integer_features)
-    y = impute_y(y)
-
-    continuous_df_features = normalize(X, continuous_features)
-    categorical_df_features = encode(X, categorical_features,binary_features)
-    select_features(continuous_df_features)
-    preprocessed_data = integrate_features_data(X, y, continuous_df_features,categorical_df_features,integer_features)
-    save_preproccesed_data(preprocessed_data['preprocessed_data'])
-    split_train_test(preprocessed_data)
-
+    # Create DataLoader object and run the process
+    model = DataPreprocessor(config_path=args.config)
+    model.load_data()
+    model.get_continuous_features()
+    model.get_categorical_features()
+    model.get_integer_features()
+    model.get_binary_features()
+    model.impute_continuous_features()
+    model.impute_integer_features()
+    model.impute_categorical_features()
+    model.impute_binary_features()
+    model.impute_target()
+    model.normalize()
+    model.encode()
+    model.engineer_features()
+    model.integrate_data()
+    model.train_test_split()
+    model.save_data_split()
