@@ -1,0 +1,30 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python load_data.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml
+    deps:
+    - path: ../params.yaml
+      hash: md5
+      md5: a53589f46743629765f1c6dffa49c7da
+      size: 1361
+    - path: load_data.py
+      hash: md5
+      md5: f398b23bcd8d790cbbeea40586820b21
+      size: 1518
+    outs:
+    - path: ../data/raw/features.csv
+      hash: md5
+      md5: bbd79514bf889fdf62a8e1b022d59792
+      size: 136138
+    - path: ../data/raw/targets.csv
+      hash: md5
+      md5: d2cbf272c41bca66f25e27f5e5231826
+      size: 33229
+    - path: ../data/raw/uci_df_raw.csv
+      hash: md5
+      md5: 4a73301138965d7c2ef643c66f0bb5c6
+      size: 169367
+    - path: ../data/raw/variables.csv
+      hash: md5
+      md5: be4514f7f2c6627042f63dc031490a7b
+      size: 6244

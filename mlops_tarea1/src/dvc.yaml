@@ -1,11 +1,11 @@
 stages:
-  load_raw_data:
-    cmd: python load_rawdata.py --config config.yaml
+  load_data:
+    cmd: python load_data.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml
     deps:
     - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml
-    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/src/load_data.py
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/load_data.py
     outs:
-    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/features.csv
-    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw_df.csv
-    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/targets.csv
-    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/variables.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/features.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/uci_df_raw.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/targets.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/variables.csv
