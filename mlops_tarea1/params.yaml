@@ -7,6 +7,13 @@ data_load:
 data_preprocess:  
   preprocessed_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/uci_df.csv'
 
+feature_selection:
+  selected_features:
+    - Age
+    - BMI
+    - Height
+    - WBC_Count
+
 data_split:
   random_state: 42
   test_size: 0.2
