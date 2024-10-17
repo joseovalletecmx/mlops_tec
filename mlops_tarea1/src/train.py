@@ -57,7 +57,7 @@ def train_model(config_path: Text) -> None:
 
 if __name__ == '__main__':
     # Set up argument parsing
-    args_parser = argparse.ArgumentParser(description='Load raw data and save to CSV files.')
+    args_parser = argparse.ArgumentParser(description='Train random forest and export model')
     args_parser.add_argument('--config', dest ='config', required=True)
     args = args_parser.parse_args()    
     # Call the function with command line arguments
