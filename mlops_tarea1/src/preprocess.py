@@ -9,10 +9,6 @@ import yaml
 from typing import Text
 import argparse
 
-
-# with open('/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml') as conf_file:
-#    config = yaml.safe_load(conf_file)
-
 class DataPreprocessor:
     def __init__(self,config_path: Text) -> None:
         self.config_path = config_path
