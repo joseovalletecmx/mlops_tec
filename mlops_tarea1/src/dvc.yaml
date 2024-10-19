@@ -9,3 +9,18 @@ stages:
     - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/uci_df_raw.csv
     - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/targets.csv
     - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/variables.csv
+  preprocess_data:
+    cmd: python preprocess.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml
+    deps:
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/preprocess.py
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/features.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/uci_df_raw.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/targets.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/variables.csv
+    outs:
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/x_train.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/x_test.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/y_train.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/y_test.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/uci_df.csv    
