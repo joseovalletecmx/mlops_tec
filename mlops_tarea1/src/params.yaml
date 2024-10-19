@@ -1,5 +1,5 @@
 config:
-  config_path: /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/stc/params.yaml
+  config_path: /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/params.yaml
 data_load:
   features_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/features.csv'
   targets_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/targets.csv'
