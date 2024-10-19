@@ -104,3 +104,15 @@ stages:
       hash: md5
       md5: 64f49bc1e99922204d2923ae094e4656
       size: 1532265
+  evaluate_model:
+    cmd: python evaluate.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml
+    deps:
+    - path: ../models/appendictis_model.pkl
+      hash: md5
+      md5: 64f49bc1e99922204d2923ae094e4656
+      size: 1532265
+    outs:
+    - path: ../reports/model_report.csv
+      hash: md5
+      md5: 6b865194a925fb3dfc7252a47feadf5c
+      size: 386

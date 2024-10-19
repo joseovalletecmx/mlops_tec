@@ -34,3 +34,9 @@ stages:
     - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/uci_df.csv
     outs:
     - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/models/appendictis_model.pkl
+  evaluate_model:
+    cmd: python evaluate.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml
+    deps:
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/models/appendictis_model.pkl
+    outs:
+    - '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/reports/model_report.csv'
