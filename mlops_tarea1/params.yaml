@@ -1,3 +1,5 @@
+config:
+  config_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml'
 data_load:
   features_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/features.csv'
   targets_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/targets.csv'
@@ -25,5 +27,5 @@ data_split:
 data_model:
   model_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/models/appendictis_model.pkl'
   model_report_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/reports/model_report.csv'
-    
+
 
