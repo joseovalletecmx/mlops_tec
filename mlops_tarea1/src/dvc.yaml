@@ -23,4 +23,14 @@ stages:
     - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/x_test.csv
     - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/y_train.csv
     - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/y_test.csv
-    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/uci_df.csv    
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/uci_df.csv
+  train_model:
+    cmd: python train.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/params.yaml
+    deps:
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/x_train.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/x_test.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/y_train.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/y_test.csv
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/uci_df.csv
+    outs:
+    - /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/models/appendictis_model.pkl
