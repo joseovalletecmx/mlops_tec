@@ -9,8 +9,8 @@ stages:
       size: 1518
     - path: params.yaml
       hash: md5
-      md5: ee7ee0b30fdfbdf7151e57c1cac60c8a
-      size: 1544
+      md5: 780350e279bb251ee847c9811c16d40c
+      size: 1593
     outs:
     - path: ../data/raw/features.csv
       hash: md5
@@ -49,8 +49,8 @@ stages:
       size: 6244
     - path: params.yaml
       hash: md5
-      md5: ee7ee0b30fdfbdf7151e57c1cac60c8a
-      size: 1544
+      md5: 780350e279bb251ee847c9811c16d40c
+      size: 1593
     - path: preprocess.py
       hash: md5
       md5: 66d8a86d3b457c71cabdd1f2c1fff81e
@@ -101,12 +101,12 @@ stages:
       size: 1260
     - path: params.yaml
       hash: md5
-      md5: ee7ee0b30fdfbdf7151e57c1cac60c8a
-      size: 1544
+      md5: 780350e279bb251ee847c9811c16d40c
+      size: 1593
     - path: train.py
       hash: md5
-      md5: 30d1fa7b6e170e86566bdfd6ecfb2780
-      size: 2225
+      md5: 6fb78e3aca64954005f1b6ed74c02e10
+      size: 2376
     outs:
     - path: ../models/appendictis_model.pkl
       hash: md5
@@ -125,8 +125,8 @@ stages:
       size: 1277
     - path: params.yaml
       hash: md5
-      md5: ee7ee0b30fdfbdf7151e57c1cac60c8a
-      size: 1544
+      md5: 780350e279bb251ee847c9811c16d40c
+      size: 1593
     outs:
     - path: ../reports/model_report.csv
       hash: md5

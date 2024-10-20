@@ -11,7 +11,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 import argparse
 import joblib
-# import mlflow
+import mlflow
 
 def train_model(config_path: Text) -> None:
     with open(config_path) as conf_file:
@@ -23,10 +23,13 @@ def train_model(config_path: Text) -> None:
     X_test  = pd.read_csv(config['data_split']['x_test_path'])
     y_test  = pd.read_csv(config['data_split']['y_test_path'])
 
+    y_train = np.array(y_train).flatten()
+    y_test = np.array(y_test).flatten()
+
 # Initialize the Random Forest Classifier
-    rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
-    rf_classifier.fit(X_train, np.array(y_train).flatten())
-    y_pred = rf_classifier.predict(X_test)
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    model.fit(X_train, np.array(y_train).flatten())
+    y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
     confusion = confusion_matrix(y_test, y_pred)
 
@@ -36,24 +39,28 @@ def train_model(config_path: Text) -> None:
     print(classification_report(y_test, y_pred))
 
     # Visualize the confusion matrix
-    plt.figure(figsize=(8, 6))
-    sns.heatmap(confusion, annot = True)
-    plt.title('Confusion Matrix')
-    plt.xlabel('Predicted Label')
-    plt.ylabel('True Label')
-    plt.show()
+    # plt.figure(figsize=(8, 6))
+    # sns.heatmap(confusion, annot = True)
+    # plt.title('Confusion Matrix')
+    # plt.xlabel('Predicted Label')
+    # plt.ylabel('True Label')
+    # plt.show()
 
-    """
-    mlflow.set_experiment(params['mlflow']['experiment_name'])
-    mlflow.set_tracking_uri(params['mlflow']['tracking_uri'])
-
-    with mlflow.start_run():
-        model.fit(X_train, y_train)
-        mlflow.sklearn.log_model(model, f"{model_type}_model")
-    """
+    mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
+    mlflow.set_experiment(f'users/test_pipeline_v3')
 
     model_path = config['data_model']['model_path']
-    joblib.dump(rf_classifier, model_path)
+    joblib.dump(model, model_path)
+
+    mlflow.start_run()
+    model.fit(X_train,y_train)
+    mlflow.sklearn.log_model(model, "model")
+    mlflow.log_params('n_estimators',100)
+    mlflow.log_params('random_state',42)
+    mlflow.log_metric('acc', accuracy)
+    mlflow.end_run()
+
+
 
 if __name__ == '__main__':
     # Set up argument parsing
