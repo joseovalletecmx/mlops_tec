@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/mlruns/0/2070b069f93142a2a39267345343ec49/artifacts
+end_time: 1729464942654
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2070b069f93142a2a39267345343ec49
+run_name: nosy-auk-273
+run_uuid: 2070b069f93142a2a39267345343ec49
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729464770091
+status: 3
+tags: []
+user_id: joseovalle

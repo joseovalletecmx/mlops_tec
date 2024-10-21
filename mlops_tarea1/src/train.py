@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
@@ -27,7 +28,7 @@ def train_model(config_path: Text) -> None:
     y_test = np.array(y_test).flatten()
 
 # Initialize the Random Forest Classifier
-    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    model = LogisticRegression()
     model.fit(X_train, np.array(y_train).flatten())
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
@@ -47,20 +48,15 @@ def train_model(config_path: Text) -> None:
     # plt.show()
 
     mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
-    mlflow.set_experiment(f'users/test_pipeline_v3')
+    mlflow.set_experiment(f'users/test_pipeline_v4')
 
     model_path = config['data_model']['model_path']
     joblib.dump(model, model_path)
 
     mlflow.start_run()
-    model.fit(X_train,y_train)
     mlflow.sklearn.log_model(model, "model")
-    mlflow.log_params('n_estimators',100)
-    mlflow.log_params('random_state',42)
     mlflow.log_metric('acc', accuracy)
     mlflow.end_run()
-
-
 
 if __name__ == '__main__':
     # Set up argument parsing
