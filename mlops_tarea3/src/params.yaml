@@ -1,0 +1,36 @@
+config:
+  config_path: /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/params.yaml
+src:
+  src_path: /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/
+data_load:
+  features_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/features.csv'
+  targets_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/targets.csv'
+  variables_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/variables.csv'
+  raw_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/raw/uci_df_raw.csv'
+
+data_preprocess:  
+  preprocessed_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/uci_df.csv'
+
+feature_selection:
+  selected_features:
+    - Age
+    - BMI
+    - Height
+    - WBC_Count
+
+data_split:
+  random_state: 42
+  test_size: 0.2
+  x_train_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/x_train.csv'
+  x_test_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/x_test.csv'
+  y_train_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/y_train.csv'
+  y_test_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/data/processed/y_test.csv'
+
+data_model:
+  model_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/models/appendictis_model.pkl'
+  model_report_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/reports/model_report.csv'
+
+mlflow:
+  tracking_uri: 'http://localhost:5001'
+
+

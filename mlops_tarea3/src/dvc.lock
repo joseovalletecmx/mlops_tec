@@ -1,0 +1,134 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python load_data.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/params.yaml
+    deps:
+    - path: load_data.py
+      hash: md5
+      md5: f398b23bcd8d790cbbeea40586820b21
+      size: 1518
+    - path: params.yaml
+      hash: md5
+      md5: 780350e279bb251ee847c9811c16d40c
+      size: 1593
+    outs:
+    - path: ../data/raw/features.csv
+      hash: md5
+      md5: bbd79514bf889fdf62a8e1b022d59792
+      size: 136138
+    - path: ../data/raw/targets.csv
+      hash: md5
+      md5: d2cbf272c41bca66f25e27f5e5231826
+      size: 33229
+    - path: ../data/raw/uci_df_raw.csv
+      hash: md5
+      md5: 4a73301138965d7c2ef643c66f0bb5c6
+      size: 169367
+    - path: ../data/raw/variables.csv
+      hash: md5
+      md5: be4514f7f2c6627042f63dc031490a7b
+      size: 6244
+  preprocess_data:
+    cmd: python preprocess.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/params.yaml
+    deps:
+    - path: ../data/raw/features.csv
+      hash: md5
+      md5: bbd79514bf889fdf62a8e1b022d59792
+      size: 136138
+    - path: ../data/raw/targets.csv
+      hash: md5
+      md5: d2cbf272c41bca66f25e27f5e5231826
+      size: 33229
+    - path: ../data/raw/uci_df_raw.csv
+      hash: md5
+      md5: 4a73301138965d7c2ef643c66f0bb5c6
+      size: 169367
+    - path: ../data/raw/variables.csv
+      hash: md5
+      md5: be4514f7f2c6627042f63dc031490a7b
+      size: 6244
+    - path: params.yaml
+      hash: md5
+      md5: 780350e279bb251ee847c9811c16d40c
+      size: 1593
+    - path: preprocess.py
+      hash: md5
+      md5: 66d8a86d3b457c71cabdd1f2c1fff81e
+      size: 9339
+    outs:
+    - path: ../data/processed/uci_df.csv
+      hash: md5
+      md5: acfa3638d26f4a321616990d6b92e76e
+      size: 692849
+    - path: ../data/processed/x_test.csv
+      hash: md5
+      md5: 575276f45e0ef52ffd02ee6de21aa7ec
+      size: 141150
+    - path: ../data/processed/x_train.csv
+      hash: md5
+      md5: d6937f9ba8a4a434c450133e6060fcce
+      size: 550894
+    - path: ../data/processed/y_test.csv
+      hash: md5
+      md5: 91869ce0d9932f2d24eee5e457df9d16
+      size: 324
+    - path: ../data/processed/y_train.csv
+      hash: md5
+      md5: e8985bc91c761e38cc88b4b788ecef4b
+      size: 1260
+  train_model:
+    cmd: python train.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/params.yaml
+    deps:
+    - path: ../data/processed/uci_df.csv
+      hash: md5
+      md5: acfa3638d26f4a321616990d6b92e76e
+      size: 692849
+    - path: ../data/processed/x_test.csv
+      hash: md5
+      md5: 575276f45e0ef52ffd02ee6de21aa7ec
+      size: 141150
+    - path: ../data/processed/x_train.csv
+      hash: md5
+      md5: d6937f9ba8a4a434c450133e6060fcce
+      size: 550894
+    - path: ../data/processed/y_test.csv
+      hash: md5
+      md5: 91869ce0d9932f2d24eee5e457df9d16
+      size: 324
+    - path: ../data/processed/y_train.csv
+      hash: md5
+      md5: e8985bc91c761e38cc88b4b788ecef4b
+      size: 1260
+    - path: params.yaml
+      hash: md5
+      md5: 780350e279bb251ee847c9811c16d40c
+      size: 1593
+    - path: train.py
+      hash: md5
+      md5: fb689a5551e1fa91a5b43415622ec079
+      size: 2275
+    outs:
+    - path: ../models/appendictis_model.pkl
+      hash: md5
+      md5: d5020b5dbc0bfbec2e063234c3f80781
+      size: 6943
+  evaluate_model:
+    cmd: python evaluate.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/params.yaml
+    deps:
+    - path: ../models/appendictis_model.pkl
+      hash: md5
+      md5: d5020b5dbc0bfbec2e063234c3f80781
+      size: 6943
+    - path: evaluate.py
+      hash: md5
+      md5: 5768185c650500a5ca89c1acceb9f711
+      size: 1277
+    - path: params.yaml
+      hash: md5
+      md5: 780350e279bb251ee847c9811c16d40c
+      size: 1593
+    outs:
+    - path: ../reports/model_report.csv
+      hash: md5
+      md5: 54dd96d4500b912cdd2f6948f3541e5f
+      size: 386
