@@ -105,8 +105,8 @@ stages:
       size: 1593
     - path: train.py
       hash: md5
-      md5: bc8e0d36221f6167e3d686f74328f74f
-      size: 2277
+      md5: c8c8e635f2100f783cad09d6f62cf903
+      size: 2666
     outs:
     - path: ../models/appendictis_model.pkl
       hash: md5

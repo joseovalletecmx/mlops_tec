@@ -10,6 +10,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
 import argparse
 import joblib
 import mlflow
@@ -32,7 +35,10 @@ def train_model(config_path: Text) -> None:
     model.fit(X_train, np.array(y_train).flatten())
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
-    confusion = confusion_matrix(y_test, y_pred)
+    # confusion = confusion_matrix(y_test, y_pred)
+    precision = precision_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
 
     # Print accuracy and confusion matrix
     print("Accuracy of the model:", round(accuracy,4))
@@ -55,7 +61,10 @@ def train_model(config_path: Text) -> None:
 
     mlflow.start_run()
     mlflow.sklearn.log_model(model, "model")
-    mlflow.log_metric('acc', accuracy)
+    mlflow.log_metric('accuracy', accuracy)
+    mlflow.log_metric('precision_score', precision)
+    mlflow.log_metric('recall_score', recall)
+    mlflow.log_metric('f1_score', f1)
     mlflow.end_run()
 
 if __name__ == '__main__':
