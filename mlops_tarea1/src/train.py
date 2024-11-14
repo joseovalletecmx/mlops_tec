@@ -48,7 +48,7 @@ def train_model(config_path: Text) -> None:
     # plt.show()
 
     mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
-    mlflow.set_experiment(f'users/test_pipeline_v4')
+    mlflow.set_experiment(f'users/appendicitis_model')
 
     model_path = config['data_model']['model_path']
     joblib.dump(model, model_path)

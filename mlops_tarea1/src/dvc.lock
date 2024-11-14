@@ -105,19 +105,19 @@ stages:
       size: 1593
     - path: train.py
       hash: md5
-      md5: fb689a5551e1fa91a5b43415622ec079
-      size: 2275
+      md5: bc8e0d36221f6167e3d686f74328f74f
+      size: 2277
     outs:
     - path: ../models/appendictis_model.pkl
       hash: md5
-      md5: 2038848fc231df83d76c559409bc0b75
+      md5: d5020b5dbc0bfbec2e063234c3f80781
       size: 6943
   evaluate_model:
     cmd: python evaluate.py --config /Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/src/params.yaml
     deps:
     - path: ../models/appendictis_model.pkl
       hash: md5
-      md5: 2038848fc231df83d76c559409bc0b75
+      md5: d5020b5dbc0bfbec2e063234c3f80781
       size: 6943
     - path: evaluate.py
       hash: md5
