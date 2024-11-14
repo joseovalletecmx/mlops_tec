@@ -57,7 +57,7 @@ def train_model(config_path: Text) -> None:
     
 
     mlflow.start_run()
-    mlflow.sklearn.log_model(model, "model")
+    mlflow.sklearn.log_model(model, "model", registered_model_name="sk-learn-logistic_regression-reg-model")
     mlflow.log_metric('accuracy', accuracy)
     mlflow.log_metric('precision_score', precision)
     mlflow.log_metric('recall_score', recall)
