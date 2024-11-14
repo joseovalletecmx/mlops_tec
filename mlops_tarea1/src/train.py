@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC  # Support Vector Classifier
+from sklearn.linear_model import SGDClassifier  # SGD Classifier
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
@@ -16,6 +18,8 @@ from sklearn.metrics import f1_score
 import argparse
 import joblib
 import mlflow
+import requests
+import time
 
 def train_model(config_path: Text) -> None:
     with open(config_path) as conf_file:
@@ -30,7 +34,7 @@ def train_model(config_path: Text) -> None:
     y_train = np.array(y_train).flatten()
     y_test = np.array(y_test).flatten()
 
-# Initialize the Random Forest Classifier
+# Initialize classifier
     model = LogisticRegression()
     model.fit(X_train, np.array(y_train).flatten())
     y_pred = model.predict(X_test)
@@ -45,19 +49,12 @@ def train_model(config_path: Text) -> None:
     print("Classification Report:")
     print(classification_report(y_test, y_pred))
 
-    # Visualize the confusion matrix
-    # plt.figure(figsize=(8, 6))
-    # sns.heatmap(confusion, annot = True)
-    # plt.title('Confusion Matrix')
-    # plt.xlabel('Predicted Label')
-    # plt.ylabel('True Label')
-    # plt.show()
-
     mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
     mlflow.set_experiment(f'users/appendicitis_model')
 
     model_path = config['data_model']['model_path']
     joblib.dump(model, model_path)
+    
 
     mlflow.start_run()
     mlflow.sklearn.log_model(model, "model")
@@ -69,7 +66,7 @@ def train_model(config_path: Text) -> None:
 
 if __name__ == '__main__':
     # Set up argument parsing
-    args_parser = argparse.ArgumentParser(description='Train random forest and export model')
+    args_parser = argparse.ArgumentParser(description='Train and export model')
     args_parser.add_argument('--config', dest ='config', required=True)
     args = args_parser.parse_args()    
     # Call the function with command line arguments

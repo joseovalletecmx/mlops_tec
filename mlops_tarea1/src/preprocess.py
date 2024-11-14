@@ -159,6 +159,7 @@ class DataPreprocessor:
         self._target.loc[self._target['Diagnosis']=='appendicitis'] = 1
         self._target.loc[self._target['Diagnosis']=='no appendicitis'] = 0
         mode_value = self._target['Diagnosis'].mode()[0]
+        self._target = self._target.infer_objects()
         self._target =  self._target.fillna(mode_value)
 
     def normalize(self):
