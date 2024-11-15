@@ -5,12 +5,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.ensemble import RandomForestClassifier
+# from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC  # Support Vector Classifier
-from sklearn.linear_model import SGDClassifier  # SGD Classifier
 from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
@@ -18,8 +15,6 @@ from sklearn.metrics import f1_score
 import argparse
 import joblib
 import mlflow
-import requests
-import time
 
 def train_model(config_path: Text) -> None:
     with open(config_path) as conf_file:
