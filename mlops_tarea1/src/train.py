@@ -59,9 +59,8 @@ def train_model(config_path: Text) -> None:
     shap_values = explainer(X_test)
 
     # Visualize SHAP results
-    shap_bar_plot_path = "shap_bar_plot.png"
-    shap.plots.bar(shap_values) # this one works too
-    plt.savefig(shap_bar_plot_path)
+    shap.plots.bar(shap_values, show = False) # this one works too
+    plt.savefig( "shap_bar_plot.png")
     plt.close()
 
     mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
@@ -76,7 +75,7 @@ def train_model(config_path: Text) -> None:
     mlflow.log_metric('precision_score', precision)
     mlflow.log_metric('recall_score', recall)
     mlflow.log_metric('f1_score', f1)
-    mlflow.log_artifact(shap_bar_plot_path, "explainability_artifacts")
+    mlflow.log_artifact("shap_bar_plot.png", "explainability_artifacts")
     mlflow.end_run()
 
 if __name__ == '__main__':
