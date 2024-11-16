@@ -30,5 +30,8 @@ data_model:
   model_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/models/appendictis_model.pkl'
   model_report_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/reports/model_report.csv'
 
+explainer:
+  explainer_path: '/Users/joseovalle/Desktop/mlops_jovalle/mlops_tec/mlops_tarea1/reports/shap_bar_plot.png'
+
 mlflow:
   tracking_uri: 'http://localhost:5001'

@@ -11,8 +11,8 @@ stages:
       size: 1518
     - path: params.yaml
       hash: md5
-      md5: c0f0aa05122661f4fc604dcaed5fa5cc
-      size: 1595
+      md5: 0f328fd44185e658d287aef398955065
+      size: 1716
     outs:
     - path: ../data/raw/features.csv
       hash: md5
@@ -57,8 +57,8 @@ stages:
       size: 9391
     - path: params.yaml
       hash: md5
-      md5: c0f0aa05122661f4fc604dcaed5fa5cc
-      size: 1595
+      md5: 0f328fd44185e658d287aef398955065
+      size: 1716
     outs:
     - path: ../data/processed/uci_df.csv
       hash: md5
@@ -107,12 +107,12 @@ stages:
       size: 1260
     - path: ../src/train.py
       hash: md5
-      md5: 13932b09b93ebe186c5631bafefc58af
-      size: 2946
+      md5: c109167c43d0e07ac04fe3e0696b32c3
+      size: 2981
     - path: params.yaml
       hash: md5
-      md5: c0f0aa05122661f4fc604dcaed5fa5cc
-      size: 1595
+      md5: 0f328fd44185e658d287aef398955065
+      size: 1716
     outs:
     - path: ../models/appendictis_model.pkl
       hash: md5
@@ -133,8 +133,8 @@ stages:
       size: 1277
     - path: params.yaml
       hash: md5
-      md5: c0f0aa05122661f4fc604dcaed5fa5cc
-      size: 1595
+      md5: 0f328fd44185e658d287aef398955065
+      size: 1716
     outs:
     - path: ../reports/model_report.csv
       hash: md5
